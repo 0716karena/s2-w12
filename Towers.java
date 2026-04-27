@@ -15,17 +15,22 @@ public class Towers{
   }
 
   //YOU::you write this -- simple ArrayList move the last item of l to r
-  private void moveFromLeftToRight(ArrayList<Integer> l,  ArrayList<Integer> r){
+  private void move(ArrayList<Integer> l,  ArrayList<Integer> r){
+    r.add(l.remove(l.size()-1));
 
   }
 
   //YOU:: recursive moment -- base case? recursive case?
   public void solve(int discs, ArrayList<Integer> l, ArrayList<Integer> m, ArrayList<Integer> r){
       if(discs == 1){
-        moveFromLeftToRight(l, r);
+        move(l, r);
       } else{
+        solve(discs-1,l, r, m);
+        move(l,r);
+        solve(discs-1,m,l,r);
+
         //recursive moment -- this three lines! and BIG HINT: two recursive calls to this method solve
-        //as well as another call to moveFromLeftToRight
+        //as well as another call to move
       }     
   }
 
